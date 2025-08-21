@@ -1,0 +1,23 @@
+2025-08-21 16:43:08 [INFO]: Server running on port 3000
+2025-08-21 16:43:42 [INFO]: Server running on port 3000
+2025-08-21 16:43:53 [INFO]: Server running on port 3000
+2025-08-21 16:43:53 [INFO]: Connected to MySQL
+2025-08-21 16:44:05 [INFO]: ::1 - - [21/Aug/2025:11:44:05 +0000] "GET /api/students HTTP/1.1" 401 25 "-" "PostmanRuntime/7.45.0"
+2025-08-21 16:45:02 [INFO]: Server running on port 3000
+2025-08-21 16:45:02 [INFO]: Connected to MySQL
+2025-08-21 16:46:09 [INFO]: Server running on port 3000
+2025-08-21 16:46:09 [INFO]: Connected to MySQL
+2025-08-21 16:46:31 [INFO]: Server running on port 3000
+2025-08-21 16:46:31 [INFO]: Connected to MySQL
+2025-08-21 16:46:35 [INFO]: Server running on port 3000
+2025-08-21 16:46:35 [INFO]: Connected to MySQL
+2025-08-21 18:03:20 [INFO]: Server running on port 3000
+2025-08-21 18:03:20 [INFO]: Connected to MySQL
+2025-08-21 18:05:29 [INFO]: Server running on port 3000
+2025-08-21 18:05:29 [INFO]: Connected to MySQL
+2025-08-21 18:06:10 [INFO]: Server running on port 3000
+2025-08-21 18:06:10 [INFO]: Connected to MySQL
+2025-08-21 18:06:29 [INFO]: Server running on port 3000
+2025-08-21 18:06:29 [INFO]: Connected to MySQL
+2025-08-21 18:06:43 [INFO]: Server running on port 3000
+2025-08-21 18:06:43 [INFO]: Connected to MySQL

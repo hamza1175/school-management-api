@@ -1,26 +1,39 @@
-import { Request, Response } from "express";
-import { AppDataSource } from "../config/database";
-import { Student } from "../models/Student";
+import { NextFunction, Request, Response } from "express";
+import * as studentService from "../services/studentService";
 
-export const getStudents = async (req: Request, res: Response) => {
+// Get all students
+export const getAllStudents = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    console.log("Fetching students...");
-
-    const studentRepository = AppDataSource.getRepository(Student);
-    const students = await studentRepository.find();
-    res.json(students);
+    const students = await studentService.getAllStudents();
+    res.status(200).json({ success: true, data: students });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching students", error });
+    res.status(500).json({ success: false, message: "Server Error", error });
+    next(error);
   }
 };
 
-export const createStudent = async (req: Request, res: Response) => {
+// Get student by ID
+export const getStudentById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    const studentRepository = AppDataSource.getRepository(Student);
-    const student = studentRepository.create(req.body);
-    const result = await studentRepository.save(student);
-    res.status(201).json(result);
+    const student = await studentService.getStudentById(Number(req.params.id));
+
+    if (!student) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Student not found" });
+    }
+
+    res.status(200).json({ success: true, data: student });
   } catch (error) {
-    res.status(500).json({ message: "Error creating student", error });
+    res.status(500).json({ success: false, message: "Server Error", error });
+    next(error);
   }
 };

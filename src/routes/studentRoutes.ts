@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { getStudents, createStudent } from "../controllers/studentController";
+import { getStudents } from "../controllers/studentController";
+import { authenticateToken } from "../middlewares/auth";
 
-const router = Router();
+const studentRoutes = Router();
 
-router.get("/", getStudents);
-router.post("/", createStudent);
+studentRoutes.get("/", getStudents);
 
-export default router;
+export default studentRoutes;
