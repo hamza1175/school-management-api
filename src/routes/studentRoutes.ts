@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { getStudents, createStudent } from "../controllers/studentController";
+import {
+  getAllStudents,
+  getStudentById,
+} from "../controllers/studentController";
+import { authMiddleware } from "../middlewares/auth";
 
-const router = Router();
+const studentRoutes = Router();
 
-router.get("/", getStudents);
-router.post("/", createStudent);
+studentRoutes.get("/", authMiddleware, getAllStudents);
+studentRoutes.get("/:id", authMiddleware, getStudentById);
 
-export default router;
+export default studentRoutes;
