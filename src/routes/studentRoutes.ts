@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { getStudents } from "../controllers/studentController";
-import { authenticateToken } from "../middlewares/auth";
+import {
+  getAllStudents,
+  getStudentById,
+} from "../controllers/studentController";
+import { authMiddleware } from "../middlewares/auth";
 
 const studentRoutes = Router();
 
-studentRoutes.get("/", getStudents);
+studentRoutes.get("/", authMiddleware, getAllStudents);
+studentRoutes.get("/:id", authMiddleware, getStudentById);
 
 export default studentRoutes;

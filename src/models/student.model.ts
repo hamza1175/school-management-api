@@ -1,6 +1,5 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../config/database";
-import Parent from "./parent.model";
 import User from "./user.model";
 
 interface StudentAttributes {
@@ -94,8 +93,5 @@ Student.init(
     timestamps: true,
   }
 );
-
-Student.belongsTo(User, { foreignKey: "parentId", as: "Parent" });
-// Student.belongsToMany(Class, { through: "StudentClass" });
 
 export default Student;

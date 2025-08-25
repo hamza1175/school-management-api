@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3001" }));
 app.use(express.json()); //parse application/json and assign to req.body
 app.use(express.urlencoded({ extended: true })); //for parsing form data with type application/x-www-form-urlencoded and assign to req.body
 app.use(helmet());
@@ -26,7 +26,7 @@ app.use(
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 
 //Routes
-app.use("api/users", authRoutes);
+app.use("/api/users", authRoutes);
 app.use("/api/students", studentRoutes);
 
 // Error Handling

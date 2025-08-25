@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import config from "../config/appConfig";
+import { verifyToken } from "../utils/jwt";
 
 const JWT_SECRET = config.jwtSecret!;
 
@@ -8,7 +9,7 @@ export interface AuthRequest extends Request {
   user?: any;
 }
 
-export const authenticateToken = (
+export const authMiddleware = (
   req: AuthRequest,
   res: Response,
   next: NextFunction
@@ -17,14 +18,16 @@ export const authenticateToken = (
   const token = authHeader && authHeader.split(" ")[1]; // Bearer <token>
 
   if (!token) {
-    return res.status(401).json({ message: "Access token missing" });
+    res.status(401).json({ message: "Access token missing" });
+    return;
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = verifyToken(token);
     req.user = decoded;
     next();
   } catch (err) {
-    return res.status(403).json({ message: "Invalid or expired token" });
+    res.status(403).json({ message: "Invalid or expired token" });
+    return;
   }
 };

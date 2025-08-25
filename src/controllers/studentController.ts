@@ -26,9 +26,8 @@ export const getStudentById = async (
     const student = await studentService.getStudentById(Number(req.params.id));
 
     if (!student) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Student not found" });
+      res.status(404).json({ success: false, message: "Student not found" });
+      return;
     }
 
     res.status(200).json({ success: true, data: student });

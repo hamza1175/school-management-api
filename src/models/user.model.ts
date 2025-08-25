@@ -39,17 +39,10 @@ User.init(
   {
     sequelize,
     modelName: "User",
-    hooks: {
-      beforeSave: async (user: User) => {
-        if (user.changed("password")) {
-          user.password = await bcrypt.hash(user.password, 12);
-        }
-      },
-    },
   }
 );
 
-User.belongsTo(Role, { foreignKey: "roleId" });
-Role.hasMany(User, { foreignKey: "roleId" });
+User.belongsTo(Role, { foreignKey: "roleId", as: "Role" });
+Role.hasMany(User, { foreignKey: "roleId", as: "Users" });
 
 export default User;
