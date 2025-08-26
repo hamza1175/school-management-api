@@ -4,12 +4,9 @@ import Student from "./student.model";
 
 class Parent extends Model {
   public id!: number;
-  public name!: string;
-  public email!: string;
-  public password!: string;
+  public userId!: string;
   public phone!: string;
   public address?: string;
-  public studentId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -17,22 +14,19 @@ class Parent extends Model {
 Parent.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
-      type: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING(150),
-      allowNull: false,
-      unique: true,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      references: {
+        model: "Users",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
     },
     phone: {
       type: DataTypes.STRING(15),
@@ -41,16 +35,6 @@ Parent.init(
     },
     address: {
       type: DataTypes.STRING(255),
-    },
-    studentId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "Students",
-        key: "id",
-      },
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
     },
     createdAt: {
       allowNull: false,
@@ -72,11 +56,10 @@ Parent.init(
 );
 
 // Association
-Student.hasOne(Parent, {
-  foreignKey: "studentId",
+Parent.hasMany(Student, {
+  foreignKey: "parentId",
+  as: "Students",
 });
-Parent.belongsTo(Student, {
-  foreignKey: "studentId",
-});
+Student.belongsTo(Parent, { foreignKey: "parentId", as: "Parent" });
 
 export default Parent;

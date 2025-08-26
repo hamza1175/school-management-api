@@ -3,12 +3,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Parents", {
+    await queryInterface.createTable("Users", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER.UNSIGNED,
+        type: Sequelize.INTEGER,
       },
       name: {
         type: Sequelize.STRING(100),
@@ -23,23 +23,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      phone: {
-        type: Sequelize.STRING(15),
-        allowNull: false,
-        unique: true,
-      },
-      address: {
-        type: Sequelize.STRING(255),
-      },
-      studentId: {
-        type: Sequelize.INTEGER.UNSIGNED,
+      roleId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Students",
+          model: "Roles",
           key: "id",
         },
-        onDelete: "CASCADE",
         onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       createdAt: {
         allowNull: false,
@@ -55,11 +47,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable("Users");
   },
 };

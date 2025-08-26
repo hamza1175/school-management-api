@@ -1,7 +1,10 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import sequelize from "../config/database";
 import bcrypt from "bcryptjs";
-import Role from "./role.model";
+import Parent from "./parent.model";
+import Student from "./student.model";
+import Teacher from "./teacher.model";
+import Admin from "./admin.model";
 
 interface UserAttributes {
   id: number;
@@ -34,15 +37,35 @@ User.init(
     name: { type: DataTypes.STRING, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false, unique: true },
     password: { type: DataTypes.STRING, allowNull: false },
-    roleId: { type: DataTypes.INTEGER, allowNull: false },
+    roleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Roles",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    },
   },
   {
     sequelize,
     modelName: "User",
+    tableName: "Users",
+    timestamps: true,
   }
 );
 
-User.belongsTo(Role, { foreignKey: "roleId", as: "Role" });
-Role.hasMany(User, { foreignKey: "roleId", as: "Users" });
+User.hasOne(Parent, { foreignKey: "userId" });
+Parent.belongsTo(User, { foreignKey: "userId" });
+
+User.hasOne(Student, { foreignKey: "userId" });
+Student.belongsTo(User, { foreignKey: "userId" });
+
+User.hasOne(Teacher, { foreignKey: "userId" });
+Teacher.belongsTo(User, { foreignKey: "userId" });
+
+User.hasOne(Admin, { foreignKey: "userId" });
+Admin.belongsTo(User, { foreignKey: "userId" });
 
 export default User;

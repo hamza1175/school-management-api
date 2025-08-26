@@ -1,5 +1,6 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import sequelize from "../config/database";
+import User from "./user.model";
 
 interface RoleAttributes {
   id: number;
@@ -21,7 +22,10 @@ Role.init(
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false, unique: true },
   },
-  { sequelize, modelName: "Role" }
+  { sequelize, modelName: "Role", tableName: "Roles", timestamps: true }
 );
+
+Role.hasMany(User, { foreignKey: "roleId", as: "Users" });
+User.belongsTo(Role, { foreignKey: "roleId", as: "Role" });
 
 export default Role;

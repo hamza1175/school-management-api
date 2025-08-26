@@ -1,40 +1,38 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../config/database";
 
-interface StudentAttributes {
+interface AdminAttributes {
   id: number;
   userId: string;
-  parentId: string;
-  class?: string;
   address?: string;
   age?: number;
-  Bform?: string;
+  CNIC?: string;
   DOB?: Date;
   phone?: string;
+  qualification?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-type StudentCreationAttributes = Optional<StudentAttributes, "id">;
+type AdminCreationAttributes = Optional<AdminAttributes, "id">;
 
-class Student
-  extends Model<StudentAttributes, StudentCreationAttributes>
-  implements StudentAttributes
+class Admin
+  extends Model<AdminAttributes, AdminCreationAttributes>
+  implements AdminAttributes
 {
   public id!: number;
   public userId!: string;
-  public parentId!: string;
-  public class?: string;
   public address?: string;
+  public CNIC?: string;
   public age?: number;
-  public Bform?: string;
+  public qualification?: string;
   public DOB?: Date;
   public phone?: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-Student.init(
+Admin.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -51,33 +49,23 @@ Student.init(
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
-    class: {
-      type: DataTypes.STRING,
-    },
     address: {
       type: DataTypes.STRING(255),
     },
     age: {
       type: DataTypes.INTEGER,
     },
-    Bform: {
+    CNIC: {
       type: DataTypes.STRING,
     },
     DOB: {
       type: DataTypes.DATE,
     },
     phone: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(15),
     },
-    parentId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "Parents",
-        key: "id",
-      },
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
+    qualification: {
+      type: DataTypes.STRING,
     },
     createdAt: {
       allowNull: false,
@@ -92,10 +80,10 @@ Student.init(
   },
   {
     sequelize,
-    modelName: "Student",
-    tableName: "Students",
+    modelName: "Admin",
+    tableName: "Admin",
     timestamps: true,
   }
 );
 
-export default Student;
+export default Admin;

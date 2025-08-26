@@ -1,0 +1,13 @@
+2025-08-26 15:17:57 [ERROR]: MySQL connection error: Failed to open the referenced table 'Parents'
+2025-08-26 15:18:08 [ERROR]: MySQL connection error: Failed to open the referenced table 'Parents'
+2025-08-26 15:18:17 [ERROR]: MySQL connection error: Failed to open the referenced table 'Parents'
+2025-08-26 15:23:10 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
+2025-08-26 15:23:35 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
+2025-08-26 15:23:38 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
+2025-08-26 15:48:36 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
+2025-08-26 15:52:07 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
+2025-08-26 15:52:26 [ERROR]: MySQL connection error: Constraint Parents_ibfk_1 on table Parents does not exist
+2025-08-26 15:55:16 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
+2025-08-26 15:56:44 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
+2025-08-26 15:56:57 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
+2025-08-26 15:57:53 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.

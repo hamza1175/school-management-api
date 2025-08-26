@@ -69,21 +69,24 @@ export const loginUser = async (
   user?: User;
   token?: string;
 }> => {
-  const user = await User.findOne({ where: { email }, include: [Role] });
+  const user = await User.findOne({
+    where: { email },
+    include: {
+      model: Role,
+      as: "Role",
+    },
+  });
 
   if (!user) {
     return { status: 401, success: false, message: "Invalid email" };
   }
 
   const isPasswordValid = await validatePassword(password, user.password);
-  console.log("isPasswordValid", isPasswordValid);
-
   if (!isPasswordValid) {
     return { status: 401, success: false, message: "Invalid credentials" };
   }
 
   const token = generateToken({ id: user.id, email: user.email });
-  console.log("token", token);
 
   return {
     status: 200,
