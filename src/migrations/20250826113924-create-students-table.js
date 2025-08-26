@@ -20,6 +20,11 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
+      rollNumber: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
+      },
       class: {
         type: Sequelize.STRING,
       },

@@ -5,6 +5,7 @@ interface StudentAttributes {
   id: number;
   userId: string;
   parentId: string;
+  rollNo: number;
   class?: string;
   address?: string;
   age?: number;
@@ -24,6 +25,7 @@ class Student
   public id!: number;
   public userId!: string;
   public parentId!: string;
+  public rollNo!: number;
   public class?: string;
   public address?: string;
   public age?: number;
@@ -32,6 +34,10 @@ class Student
   public phone?: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public get formattedRollNo(): string {
+    return `STU-${this.rollNo}`;
+  }
 }
 
 Student.init(
@@ -50,6 +56,11 @@ Student.init(
       },
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
+    },
+    rollNo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
     },
     class: {
       type: DataTypes.STRING,
@@ -95,6 +106,15 @@ Student.init(
     modelName: "Student",
     tableName: "Students",
     timestamps: true,
+    hooks: {
+      beforeCreate: async (student: Student) => {
+        const lastStudent = await Student.findOne({
+          order: [["rollNo", "DESC"]],
+        });
+        const startNumber = 0; // starting rollNo
+        student.rollNo = lastStudent ? lastStudent.rollNo + 1 : startNumber + 1;
+      },
+    },
   }
 );
 
