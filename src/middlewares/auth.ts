@@ -1,11 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import config from "../config/appConfig";
-import { verifyToken } from "../utils/jwt";
+import { verifyToken } from "../utils/jwtUtils";
 import User from "../models/user.model";
 import Role from "../models/role.model";
-
-const JWT_SECRET = config.jwtSecret!;
 
 export interface AuthRequest extends Request {
   user?: any;
@@ -39,7 +35,7 @@ export const authMiddleware = (allowedRoles: string[]) => {
       req.user = decoded;
 
       if (allowedRoles.length && !allowedRoles.includes(user.Role.name)) {
-        res.status(403).json({ message: "Unauthorized" });
+        res.status(403).json({ message: "Insufficient permission" });
         return;
       }
       req.user.role = user.Role.name;

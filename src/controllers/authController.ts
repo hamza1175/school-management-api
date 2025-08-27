@@ -7,14 +7,14 @@ export const register = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { name, email, password, roleName } = req.body;
-    if (!name || !email || !password || !roleName) {
+    const { email, password, roleName } = req.body;
+    if (!email || !password || !roleName) {
       res
         .status(400)
         .json({ success: false, message: "Missing required fields" });
       return;
     }
-    const response = await registerUser(name, email, password, roleName);
+    const response = await registerUser(email, password, roleName);
     if (!response.success) {
       res.status(response.status).json(response);
       return;

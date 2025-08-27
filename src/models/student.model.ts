@@ -3,10 +3,13 @@ import sequelize from "../config/database";
 
 interface StudentAttributes {
   id: number;
-  userId: string;
-  parentId: string;
-  rollNo: number;
-  class?: string;
+  userId: number;
+  parentId: number;
+  rollNo?: number;
+  firstName: string;
+  lastName: string;
+  class: string;
+  section: string;
   address?: string;
   age?: number;
   Bform?: string;
@@ -23,10 +26,13 @@ class Student
   implements StudentAttributes
 {
   public id!: number;
-  public userId!: string;
-  public parentId!: string;
+  public userId!: number;
+  public parentId!: number;
+  public firstName!: string;
+  public lastName!: string;
   public rollNo!: number;
-  public class?: string;
+  public class!: string;
+  public section!: string;
   public address?: string;
   public age?: number;
   public Bform?: string;
@@ -34,10 +40,6 @@ class Student
   public phone?: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
-
-  public get formattedRollNo(): string {
-    return `STU-${this.rollNo}`;
-  }
 }
 
 Student.init(
@@ -57,14 +59,18 @@ Student.init(
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
+    firstName: { type: DataTypes.STRING, allowNull: false },
+    lastName: { type: DataTypes.STRING, allowNull: false },
     rollNo: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       unique: true,
     },
     class: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
+    section: { type: DataTypes.STRING, allowNull: false },
     address: {
       type: DataTypes.STRING(255),
     },

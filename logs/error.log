@@ -11,3 +11,5 @@
 2025-08-26 15:56:44 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
 2025-08-26 15:56:57 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
 2025-08-26 15:57:53 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
+2025-08-27 18:05:28 [ERROR]: Error registering student: Validation error
+2025-08-27 18:15:17 [ERROR]: Error registering student: Data too long for column 'phone' at row 1

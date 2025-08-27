@@ -20,13 +20,26 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      rollNumber: {
+      firstName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      rollNo: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
       },
       class: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      section: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       address: {
         type: Sequelize.STRING(255),
