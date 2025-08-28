@@ -14,10 +14,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "admin1234A!",
-    "database": "school_management_prod",
-    "host": "localhost",
-    "dialect": "mysql"
+    "username": "admin",
+    "password": "abc1234A!",
+    "database": "schoolmanagement",
+    "host": "schoolmanagement.cjw02mq4ayr4.eu-north-1.rds.amazonaws.com",
+    "dialect": "mysql",
+    "port": 3306
   }
 }

@@ -9,9 +9,9 @@ const sequelize = new Sequelize(
   config.db.user!,
   config.db.password!,
   {
+    port: Number(config.db.port) || 3306,
     host: config.db.host,
     dialect: "mysql",
-    logging: false,
   }
 );
 
