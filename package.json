@@ -4,7 +4,7 @@
   "main": "app.ts",
   "scripts": {
     "start": "node dist/server.ts",
-    "build": "tsc",
+    "build": "node dist/server.ts",
     "dev": "nodemon src/server.ts",
     "sequelize": "ts-node --transpile-only ./node_modules/.bin/sequelize-cli"
   },
