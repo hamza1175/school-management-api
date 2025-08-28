@@ -26,8 +26,8 @@ app.use(
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 
 //Routes
-app.use("/api/users", authRoutes);
-app.use("/api/students", studentRoutes);
+app.use("/api/user", authRoutes);
+app.use("/api/student", studentRoutes);
 
 // Error Handling
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

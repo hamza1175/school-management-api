@@ -8,22 +8,38 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER.UNSIGNED,
+        type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING(100),
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        reference: {
+          model: "Users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      firstName: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING(150),
+      lastName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      rollNo: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
       },
-      password: {
+      class: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
-      grade: {
+      section: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       address: {
         type: Sequelize.STRING(255),
@@ -40,6 +56,16 @@ module.exports = {
       phone: {
         type: Sequelize.STRING(15),
       },
+      parentId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        reference: {
+          model: "Parents",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -54,11 +80,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable("Students");
   },
 };

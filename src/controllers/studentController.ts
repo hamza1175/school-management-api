@@ -1,6 +1,77 @@
 import { NextFunction, Request, Response } from "express";
 import * as studentService from "../services/studentService";
 
+// Create student
+export const register = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const {
+      firstName,
+      lastName,
+      email,
+      className,
+      section,
+      address,
+      age,
+      Bform,
+      DOB,
+      phone,
+      parentEmail,
+      parentPhone,
+      parentAddress,
+    } = req.body;
+
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !className ||
+      !section ||
+      !address ||
+      !age ||
+      !Bform ||
+      !DOB ||
+      !phone ||
+      !parentEmail ||
+      !parentPhone ||
+      !parentAddress
+    ) {
+      res
+        .status(400)
+        .json({ success: false, message: "Missing required fields" });
+      return;
+    }
+    const response = await studentService.registerStudent(
+      firstName,
+      lastName,
+      email,
+      className,
+      section,
+      address,
+      age,
+      Bform,
+      DOB,
+      phone,
+      parentEmail,
+      parentPhone,
+      parentAddress
+    );
+    if (!response.success) {
+      res.status(response.status).json(response);
+      return;
+    }
+    res.status(response.status).json(response);
+  } catch (err: any) {
+    res
+      .status(500)
+      .json({ success: false, message: "Server Error", error: err.message });
+    next(err);
+  }
+};
+
 // Get all students
 export const getAllStudents = async (
   req: Request,

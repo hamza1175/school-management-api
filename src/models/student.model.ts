@@ -1,13 +1,15 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../config/database";
-import User from "./user.model";
 
 interface StudentAttributes {
   id: number;
-  name: string;
-  email: string;
-  password: string;
-  grade?: string;
+  userId: number;
+  parentId: number;
+  rollNo?: number;
+  firstName: string;
+  lastName: string;
+  class: string;
+  section: string;
   address?: string;
   age?: number;
   Bform?: string;
@@ -24,10 +26,13 @@ class Student
   implements StudentAttributes
 {
   public id!: number;
-  public name!: string;
-  public email!: string;
-  public password!: string;
-  public grade?: string;
+  public userId!: number;
+  public parentId!: number;
+  public firstName!: string;
+  public lastName!: string;
+  public rollNo!: number;
+  public class!: string;
+  public section!: string;
   public address?: string;
   public age?: number;
   public Bform?: string;
@@ -40,26 +45,32 @@ class Student
 Student.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
-      type: new DataTypes.STRING(100),
+    userId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "Users",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
     },
-    email: {
-      type: new DataTypes.STRING(150),
-      allowNull: false,
+    firstName: { type: DataTypes.STRING, allowNull: false },
+    lastName: { type: DataTypes.STRING, allowNull: false },
+    rollNo: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
       unique: true,
     },
-    password: {
+    class: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    grade: {
-      type: DataTypes.STRING,
-    },
+    section: { type: DataTypes.STRING, allowNull: false },
     address: {
       type: DataTypes.STRING(255),
     },
@@ -74,6 +85,16 @@ Student.init(
     },
     phone: {
       type: DataTypes.STRING,
+    },
+    parentId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Parents",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
     },
     createdAt: {
       allowNull: false,
@@ -91,6 +112,15 @@ Student.init(
     modelName: "Student",
     tableName: "Students",
     timestamps: true,
+    hooks: {
+      beforeCreate: async (student: Student) => {
+        const lastStudent = await Student.findOne({
+          order: [["rollNo", "DESC"]],
+        });
+        const startNumber = 0; // starting rollNo
+        student.rollNo = lastStudent ? lastStudent.rollNo + 1 : startNumber + 1;
+      },
+    },
   }
 );
 

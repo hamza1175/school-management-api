@@ -1,8 +1,4 @@
-import { NextFunction, Request, RequestHandler, Response } from "express";
-import bcrypt from "bcryptjs";
-import { generateToken } from "../utils/jwt";
-import User from "../models/user.model";
-import Role from "../models/role.model";
+import { NextFunction, Request, Response } from "express";
 import { loginUser, registerUser } from "../services/authService";
 
 export const register = async (
@@ -11,16 +7,14 @@ export const register = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    console.log("req.body", req.body);
-
-    const { name, email, password, roleName } = req.body;
-    if (!name || !email || !password || !roleName) {
+    const { email, password, roleName } = req.body;
+    if (!email || !password || !roleName) {
       res
         .status(400)
         .json({ success: false, message: "Missing required fields" });
       return;
     }
-    const response = await registerUser(name, email, password, roleName);
+    const response = await registerUser(email, password, roleName);
     if (!response.success) {
       res.status(response.status).json(response);
       return;
@@ -36,14 +30,15 @@ export const register = async (
 
 export const login = async (req: Request, res: Response) => {
   try {
-    console.log("req.body", req.body);
     const { email, password } = req.body;
 
     const response = await loginUser(email, password);
+
     if (!response.success) {
       res.status(response.status).json(response);
       return;
     }
+
     const { token } = response;
     if (!token) {
       res.status(500).json({ message: "Error logging in" });
