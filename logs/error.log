@@ -13,3 +13,17 @@
 2025-08-26 15:57:53 [ERROR]: MySQL connection error: Referencing column 'parentId' and referenced column 'id' in foreign key constraint 'Students_ibfk_1' are incompatible.
 2025-08-27 18:05:28 [ERROR]: Error registering student: Validation error
 2025-08-27 18:15:17 [ERROR]: Error registering student: Data too long for column 'phone' at row 1
+2025-08-28 14:23:34 [ERROR]: MySQL connection error: connect ETIMEDOUT
+2025-08-28 14:26:46 [ERROR]: MySQL connection error: connect ETIMEDOUT
+2025-08-28 14:31:32 [ERROR]: MySQL connection error: connect ETIMEDOUT
+2025-08-28 14:31:54 [ERROR]: MySQL connection error: connect ETIMEDOUT
+2025-08-28 14:33:40 [ERROR]: MySQL connection error: connect ETIMEDOUT
+2025-08-28 14:37:01 [ERROR]: MySQL connection error: connect ETIMEDOUT
+2025-08-28 14:37:24 [ERROR]: MySQL connection error: connect ETIMEDOUT
+2025-08-28 14:59:03 [ERROR]: MySQL connection error: connect ETIMEDOUT
+2025-08-28 14:59:46 [ERROR]: MySQL connection error: connect ETIMEDOUT
+2025-08-28 15:19:28 [ERROR]: MySQL connection error: Unknown database 'schoolmanagement'
+2025-08-28 15:30:41 [ERROR]: MySQL connection error: Unknown database 'schoolmanagement'
+2025-08-28 15:30:59 [ERROR]: MySQL connection error: Unknown database 'schoolmanagement'
+2025-08-28 15:32:09 [ERROR]: MySQL connection error: Unknown database 'schoolmanagement'
+2025-08-28 15:32:36 [ERROR]: MySQL connection error: Unknown database 'schoolmanagement'
