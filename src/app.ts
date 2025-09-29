@@ -39,7 +39,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 sequelize
   .sync()
   .then(() => {
-    console.log("Connected to MySQL");
+    console.log("Connected to MySQL database");
     logger.info("Connected to MySQL");
   })
   .catch((err: Error) => {
